@@ -140,12 +140,12 @@
       this[globalName] = mainExports;
     }
   }
-})({"1Mq12":[function(require,module,exports) {
+})({"5DYht":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "4a236f9275d0a351";
-module.bundle.HMR_BUNDLE_ID = "b5b6c481d56a3cb1";
+module.bundle.HMR_BUNDLE_ID = "6e08fa121a68946a";
 "use strict";
 function _createForOfIteratorHelper(o, allowArrayLike) {
     var it;
@@ -468,28 +468,32 @@ textarea.onchange = function() {
     convert("convertYamlToJson", textarea.value, code_area);
 };
 code_area.onchange = function() {
-    convert("convertJsonToYaml", code_area.value, code_area);
+    convert("convertJsonToYaml", code_area.value, textarea);
 };
 convert_to_json.onclick = function() {
     convert("convertYamlToJson", textarea.value, code_area);
 };
 convert_to_yaml.onclick = function() {
-    convert("convertJsonToYaml", textarea.value, code_area);
+    convert("convertJsonToYaml", code_area.value, textarea);
 };
 function convert(type, input, output) {
     console.log("try to convert " + type);
     let result = "";
     try {
-        if (type === "convertJsonToYaml") result = convertJsonToYaml(input);
-        else result = convertYamlToJson(input);
+        if (type === "convertJsonToYaml") {
+            console.log("convertJsonToYaml");
+            result = convertJsonToYaml(input);
+        } else {
+            console.log("convertYamlToJson");
+            result = convertYamlToJson(input);
+        }
         output.value = result;
     } catch (e) {
         console.log(e);
     }
 }
 function convertJsonToYaml(input) {
-    let doc = yaml.load(input);
-    return yaml.dump(doc);
+    return yaml.dump(yaml.load(input));
 }
 function convertYamlToJson(input) {
     return JSON.stringify(yaml.load(input), null, 2);
@@ -2926,6 +2930,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["1Mq12","5HwUs"], "5HwUs", "parcelRequire3cdd")
+},{}]},["5DYht","5HwUs"], "5HwUs", "parcelRequire3cdd")
 
-//# sourceMappingURL=index.d56a3cb1.js.map
+//# sourceMappingURL=index.1a68946a.js.map
