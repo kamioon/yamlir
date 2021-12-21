@@ -5,26 +5,28 @@ let code_area = document.getElementById("code_area");
 let convert_to_yaml = document.getElementById("convert_to_yaml")
 let convert_to_json = document.getElementById("convert_to_json")
 
-textarea.onchange = function (){
-    convert("convertYamlToJson",textarea.value,code_area)
+textarea.onchange = function () {
+    convert("convertYamlToJson", textarea.value, code_area)
 }
-code_area.onchange = function (){
-    convert("convertJsonToYaml",code_area.value,code_area)
+code_area.onchange = function () {
+    convert("convertJsonToYaml", code_area.value, textarea)
 }
-convert_to_json.onclick = function (){
-    convert("convertYamlToJson",textarea.value,code_area)
+convert_to_json.onclick = function () {
+    convert("convertYamlToJson", textarea.value, code_area)
 }
-convert_to_yaml.onclick = function (){
-    convert("convertJsonToYaml",textarea.value,code_area)
+convert_to_yaml.onclick = function () {
+    convert("convertJsonToYaml", code_area.value, textarea)
 }
 
 function convert(type, input, output) {
-    console.log("try to convert "+type)
+    console.log("try to convert " + type)
     let result = ""
     try {
         if (type === "convertJsonToYaml") {
+            console.log("convertJsonToYaml")
             result = convertJsonToYaml(input)
         } else {
+            console.log("convertYamlToJson")
             result = convertYamlToJson(input)
         }
         output.value = result
@@ -33,10 +35,8 @@ function convert(type, input, output) {
     }
 }
 
-
 function convertJsonToYaml(input) {
-    let doc = yaml.load(input)
-    return yaml.dump(doc)
+    return yaml.dump(yaml.load(input))
 }
 
 function convertYamlToJson(input) {
